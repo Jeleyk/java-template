@@ -35,6 +35,8 @@ public class MatrixGeneratorTest
       }
       lineCount++;
     }
+    reader.close();
+
     assertTrue(emptyLineCount>1);
     assertEquals(10,lineCount);
   }

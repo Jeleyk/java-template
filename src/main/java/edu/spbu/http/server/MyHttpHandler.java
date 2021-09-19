@@ -45,6 +45,7 @@ public class MyHttpHandler implements HttpHandler {
         while (reader.ready()) {
             htmlBuilder.append(reader.readLine());
         }
+        reader.close();
         htmlBuilder = replaceParameters(htmlBuilder, parameters);
 
         httpExchange.sendResponseHeaders(200, htmlBuilder.length());
