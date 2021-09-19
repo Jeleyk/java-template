@@ -1,5 +1,6 @@
 package edu.spbu.sort;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -29,21 +30,26 @@ public class IntSort {
         mergeSort(array, m, endIndex);
 
 
-        int i = startIndex, j = m;
-        while (i < m || j < endIndex) {
-            int index = i + j - m;
-            if (i >= m) {
-                array[index] = array[j++];
+        int[] a = new int[length];
+        System.arraycopy(array, startIndex, a, 0, length);
+
+        int m1 = length / 2;
+        int i = 0, j = m1;
+
+        while (i < m1 || j < length) {
+            int index = startIndex + i + j - m1;
+            if (i >= m1) {
+                array[index] = a[j++];
                 continue;
             }
-            if (j >= endIndex) {
-                array[index] = array[i++];
+            if (j >= endIndex - startIndex) {
+                array[index] = a[i++];
                 continue;
             }
-            if (array[i] < array[j]) {
-                array[index] = array[i++];
+            if (a[i] < a[j]) {
+                array[index] = a[i++];
             } else {
-                array[index] = array[j++];
+                array[index] = a[j++];
             }
         }
 
@@ -70,21 +76,28 @@ public class IntSort {
         mergeSort(list, m, endIndex);
 
 
-        int i = startIndex, j = m;
-        while (i < m || j < endIndex) {
-            int index = i + j - m;
-            if (i >= m) {
-                list.set(index, list.get(j++));
+        int[] a = new int[length];
+        for (int i = 0; i < length; i++) {
+            a[i] = list.get(startIndex + i);
+        }
+
+        int m1 = length / 2;
+        int i = 0, j = m1;
+
+        while (i < m1 || j < length) {
+            int index = startIndex + i + j - m1;
+            if (i >= m1) {
+                list.set(index, a[j++]);
                 continue;
             }
-            if (j >= endIndex) {
-                list.set(index, list.get(i++));
+            if (j >= endIndex - startIndex) {
+                list.set(index, a[i++]);
                 continue;
             }
-            if (list.get(i) < list.get(j)) {
-                list.set(index, list.get(i++));
+            if (a[i] < a[j]) {
+                list.set(index, a[i++]);
             } else {
-                list.set(index, list.get(j++));
+                list.set(index, a[j++]);
             }
         }
 
