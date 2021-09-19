@@ -127,8 +127,8 @@ public class DenseMatrix implements Matrix {
         List<Future<?>> list = new ArrayList<>();
         for (int i = 0; i < parts; i++) {
             int i1 = i;
-            list.add(service.submit(new Thread(() ->
-                    fillArray(array, linesCount / parts * i1, linesCount / parts * (i1 + 1), o))));
+            list.add(service.submit(() ->
+                    fillArray(array, linesCount / parts * i1, linesCount / parts * (i1 + 1), o)));
         }
 
         try {
