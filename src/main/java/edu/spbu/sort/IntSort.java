@@ -1,8 +1,5 @@
 package edu.spbu.sort;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,31 +22,30 @@ public class IntSort {
             return;
         }
 
-        int m = (startIndex + endIndex) / 2;
-        mergeSort(array, startIndex, m);
-        mergeSort(array, m, endIndex);
+        int centerIndex = (startIndex + endIndex) / 2;
+        mergeSort(array, startIndex, centerIndex);
+        mergeSort(array, centerIndex, endIndex);
 
 
-        int[] a = new int[length];
-        System.arraycopy(array, startIndex, a, 0, length);
+        int[] arrayCopy = new int[length];
+        System.arraycopy(array, startIndex, arrayCopy, 0, length);
 
         int m1 = length / 2;
         int i = 0, j = m1;
-
         while (i < m1 || j < length) {
             int index = startIndex + i + j - m1;
             if (i >= m1) {
-                array[index] = a[j++];
+                array[index] = arrayCopy[j++];
                 continue;
             }
             if (j >= endIndex - startIndex) {
-                array[index] = a[i++];
+                array[index] = arrayCopy[i++];
                 continue;
             }
-            if (a[i] < a[j]) {
-                array[index] = a[i++];
+            if (arrayCopy[i] < arrayCopy[j]) {
+                array[index] = arrayCopy[i++];
             } else {
-                array[index] = a[j++];
+                array[index] = arrayCopy[j++];
             }
         }
 
@@ -71,14 +67,14 @@ public class IntSort {
             return;
         }
 
-        int m = (startIndex + endIndex) / 2;
-        mergeSort(list, startIndex, m);
-        mergeSort(list, m, endIndex);
+        int centerIndex = (startIndex + endIndex) / 2;
+        mergeSort(list, startIndex, centerIndex);
+        mergeSort(list, centerIndex, endIndex);
 
 
-        int[] a = new int[length];
+        int[] arrayCopy = new int[length];
         for (int i = 0; i < length; i++) {
-            a[i] = list.get(startIndex + i);
+            arrayCopy[i] = list.get(startIndex + i);
         }
 
         int m1 = length / 2;
@@ -87,17 +83,17 @@ public class IntSort {
         while (i < m1 || j < length) {
             int index = startIndex + i + j - m1;
             if (i >= m1) {
-                list.set(index, a[j++]);
+                list.set(index, arrayCopy[j++]);
                 continue;
             }
             if (j >= endIndex - startIndex) {
-                list.set(index, a[i++]);
+                list.set(index, arrayCopy[i++]);
                 continue;
             }
-            if (a[i] < a[j]) {
-                list.set(index, a[i++]);
+            if (arrayCopy[i] < arrayCopy[j]) {
+                list.set(index, arrayCopy[i++]);
             } else {
-                list.set(index, a[j++]);
+                list.set(index, arrayCopy[j++]);
             }
         }
 
